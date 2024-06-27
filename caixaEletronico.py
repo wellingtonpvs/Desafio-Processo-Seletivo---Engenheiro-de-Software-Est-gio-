@@ -9,7 +9,7 @@ cedulas = [100, 50, 20, 10, 5, 2]
 def saque():
     data = request.get_json()
     
-    # Validação de entrada
+    # Valida entrada
     if not data or 'valor' not in data:
         return jsonify({'error': 'Valor não fornecido'}), 400
     
@@ -18,7 +18,7 @@ def saque():
     if not isinstance(valor, int) or valor <= 0:
         return jsonify({'error': 'O valor deve ser um número inteiro positivo'}), 400
     
-    # Algoritmo para calcular a quantidade de cédulas
+    # Calcula quantidade de cedulas
     resultado = {}
     valor_restante = valor
     
@@ -27,7 +27,7 @@ def saque():
         resultado[str(cedula)] = quantidade
         valor_restante -= quantidade * cedula
     
-    # Verificar se o valor solicitado pode ser atendido com as cédulas disponíveis
+    # Verifica se as cedulas dusponiveis atendem o valor inserido.
     if valor_restante > 0:
         sugestao = valor - valor_restante
         return jsonify({
